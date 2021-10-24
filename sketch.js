@@ -1,42 +1,93 @@
 'use strict';
 
-class Planet {
-  constructor(x, g){
+class Ball {
+  constructor(x, v){
     this.x = x;
-    this.y = 0;
-    this.speed = g;
+    this.y = 15;
+    this.velocity = v;
 }
   move(){
-    this.y = this.y - this.speed;
+    this.y = this.y - this.velocity;
   }
   show(){
     stroke(255);
-    circle (this.x, this.y, 5);
+    circle(this.x, this.y, 5);
   }
 }
-const ball = [];
+
+let i2 = 0;
+let xPos = 0;
+const velocity = [-10, -3, -5, -5, -5, -5, -5, -5, -5, -5, -5, -5];
+const ballArray = [];
+let timeDisplay = "0:00";
+let timeCalc = 0;
 
 function setup (){
     createCanvas (750, 500);
     textSize(20);
-    //array aus den einzelnen m/s der planeten
-    //vielleicht doch planeten einzeln und nicht als loop
-    for (let i = 0; i < 12; i++) {
-      ball[i] = new Planet(10, -3);  
-      print(ball[i]);
+
+    for (let i = 0; i < 12; i++, i2++) {
+      xPos += 70;
+      ballArray[i] = new Ball(xPos, velocity[i2]);  
+      print(ballArray[i]);
     }
+
+    function startTimer(duration, display) {
+      let timer = duration, minutes, seconds;
+      setInterval(function () {
+          minutes = parseInt(timer / 60, 10)
+          seconds = parseInt(timer % 60, 10);
+          minutes = minutes < 10 ? + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+  
+          display.textContent = minutes + ":" + seconds;
+          timeDisplay = display.textContent;
+          timeCalc = parseInt(seconds);
+
+          if (++timer < 0) {
+        timer = duration;
+          }
+    }, 1000);
   }
+  function timer() {
+      let Minutes = 0,
+         display = document.getElementById("timer");
+      startTimer(Minutes, display);
+  };
+
+  timer();
+}
   
   function draw(){ 
     background(0, 0, 0);
   
-    ball.forEach(ball => {
-      ball.move();
-      ball.show();
+    ballArray.forEach(ballArray => {
+      ballArray.move();
+      ballArray.show();
       
-    if (ball.y > 400) {
-      ball.y = -350;   
+    if (ballArray.y > 400) {
+      ballArray.velocity = 0;   
     }
+
+    const calc = (g, t) => {
+      let v = 0;
+      v = g * t * 3.6;
+      noStroke();
+      textSize(20);
+      text(Math.floor(v) + " km/h", 50, 50);
+      fill(255, 255, 255);
+    }
+
+
+
+    
+    calc(9.8, timeCalc);
+
   });
-  text("1km Ball Drop On Solar System Bodies", 175, 25);
+  noStroke();
+  text("1km Ball Drop On Solar System Bodies", 180, 25);
+
+  text(timeDisplay + " timedisplay", 250, 250);
+  text(timeCalc + " timecalc", 270, 270);
+  fill(255, 255, 255);
 }
