@@ -3,7 +3,7 @@
 class Ball {
   constructor(x, v){
     this.x = x;
-    this.y = 15;
+    this.y = 100;
     this.velocity = v;
 }
   move(){
@@ -17,7 +17,7 @@ class Ball {
 
 let i2 = 0;
 let xPos = 0;
-const velocity = [-10, -3, -5, -5, -5, -5, -5, -5, -5, -5, -5, -5];
+const velocity = [-0.43, -3, -5, -5, -5, -5, -5, -5, -5, -5, -5, -5];
 const ballArray = [];
 let timeDisplay = "0:00";
 let timeCalc = 0;
@@ -29,7 +29,6 @@ function setup (){
     for (let i = 0; i < 12; i++, i2++) {
       xPos += 70;
       ballArray[i] = new Ball(xPos, velocity[i2]);  
-      print(ballArray[i]);
     }
 
     function startTimer(duration, display) {
@@ -66,15 +65,19 @@ function setup (){
       ballArray.move();
       ballArray.show();
       
-    if (ballArray.y > 400) {
+    if (ballArray.y > 490) {
       ballArray.velocity = 0;   
     }
+    stroke(100);
+    line(0, 500, 750, 500);
+    line(0, 100, 750, 100);
+
 
     const calc = (g, t) => {
       let d = 0;
       let v = 0;
       v = g * t;
-      d = v * t / 3.6;
+      d = v * t / 3600;
       t = Math.sqrt(2 * 1000 / g);
       text((d).toFixed(2) + " km", 50, 75);
       text(t.toFixed(2) + " time", 50, 100);
@@ -92,9 +95,9 @@ function setup (){
 
   });
   noStroke();
-  text("1km Ball Drop On Solar System Bodies", 180, 25);
+  //text("1km Ball Drop On Solar System Bodies", 180, 25);
 
-  text(timeDisplay + " timedisplay", 250, 250);
-  text(timeCalc + " timecalc", 270, 270);
+  text(timeDisplay + " tDisplay", 10, 20);
+  text(timeCalc + " timecalc", 200, 20);
   fill(255, 255, 255);
 }
