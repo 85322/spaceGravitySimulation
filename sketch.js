@@ -43,6 +43,7 @@ function setup (){
           display.textContent = minutes + ":" + seconds;
           timeDisplay = display.textContent;
           timeCalc = parseInt(seconds);
+        
 
           if (++timer < 0) {
         timer = duration;
@@ -70,18 +71,24 @@ function setup (){
     }
 
     const calc = (g, t) => {
+      let d = 0;
       let v = 0;
-      v = g * t * 3.6;
+      v = g * t;
+      d = v * t / 3.6;
+      t = Math.sqrt(2 * 1000 / g);
+      text((d).toFixed(2) + " km", 50, 75);
+      text(t.toFixed(2) + " time", 50, 100);
       noStroke();
       textSize(20);
       text(Math.floor(v) + " km/h", 50, 50);
       fill(255, 255, 255);
+      console.log("d = " + d + " v" + v + " * t" + t + " / 3600");
     }
-
-
 
     
     calc(9.8, timeCalc);
+
+
 
   });
   noStroke();
