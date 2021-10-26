@@ -28,12 +28,12 @@ class Planet {
 
 let xPos = 0;
 let yPos = 505;
-const velocity = [-3, -0.43, -5, -0.43, -5, -5, -5, -5, -5, -5, -5];
+const velocity = [-2.7, -0.265, -0.4, -0.43, -0.178, -0.264, -0.62, -0.44, -0.4, -0.445, -0.11];
 const ballArray = [];
 const planetArray = [];
 let timeDisplay = "0:00";
 let timeCalc = 0;
-const planetArrayImage = ['sun','mercury','venus','earth','moon','mars','jupiter','saturn','uranus','neptune','pluto'];
+const planetImageArray = ['sun','mercury','venus','earth','moon','mars','jupiter','saturn','uranus','neptune','pluto'];
 const calcFunctionDataArray = [274, 3.7, 8.9, 9.8, 1.6, 3.7, 24.8, 10.4, 8.9, 11.2, 0.6];
 
 function setup (){
@@ -44,7 +44,7 @@ function setup (){
     for (let i = 0; i < velocity.length; i++) {
       xPos += 75;
       ballArray[i] = new Ball(xPos, velocity[i]);  
-      planetArray[i] = new Planet(xPos, yPos, planetArrayImage[i]);
+      planetArray[i] = new Planet(xPos, yPos, planetImageArray[i]);
     }
 
     function startTimer(duration, display) {
@@ -98,7 +98,7 @@ function setup (){
   planetArray.forEach(planetArray => {
     planetArray.display();
 });
-  //calculates and displays data of falling ball graphic
+  //returns data of falling ball graphic
   //[t] based on timer to re-calculate velocity each second of free fall 
   const calc = (g, t) => {
     //let d = 0;
@@ -110,7 +110,8 @@ function setup (){
     return returnArray;
   }
   
-  const calcInput = () => {
+  //inserts data into calc() from data array, displays return values, increments xTextPos pixel position for each planet
+  const calcInputAndDisplay = () => {
     let xTextPos = 0;
   for (let i = 0; i < calcFunctionDataArray.length; i++) {
     let results = calc(calcFunctionDataArray[i], timeCalc);
@@ -118,9 +119,26 @@ function setup (){
 
     textSize(13);
     noStroke();
-    text(Math.floor(results[0]) + " km/h", xTextPos, 50);
-    text(results[1].toFixed(2) + " s", xTextPos, 80);
+    fill(255, 255, 255);
+    text(Math.floor(results[0]) + "km/h", xTextPos, 50);
+  console.log(ballArray[1].velocity);
+      if(ballArray[i].velocity == 0) {
+        fill(0, 255, 0);
+        text(results[1].toFixed(2) + " s", xTextPos, 80);    
+      }  else {
+        fill(255, 255, 255);
+      }
+    
+
+    
+  
+    
+    
+    fill(255, 255, 255);
+    text("Gravity \n" + calcFunctionDataArray[i] + " m/s²", xTextPos -22, 580);
   }
+  
 }
-calcInput();
+calcInputAndDisplay();
 }
+
