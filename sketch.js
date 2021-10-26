@@ -5,14 +5,13 @@ class Ball {
     this.x = x;
     this.y = 100;
     this.velocity = v;
-    
 }
   move(){
     this.y = this.y - this.velocity;
   }
-  show(){
+  display(){
     stroke(255);
-    circle(this.x, this.y, 5);
+    circle(this.x, this.y, 7);
   }
 }
 
@@ -22,16 +21,13 @@ class Planet {
     this.y = y;
     this.img = loadImage('assets/' + img + ".png");
   }
-    show(){
+    display(){
       image(this.img, this.x -30, this.y);
-
   }
 }
 
 let xPos = 0;
 let yPos = 505;
-let yTextPos = 0;
-let yTextPos2 = 0;
 const velocity = [-3, -0.43, -5, -0.43, -5, -5, -5, -5, -5, -5, -5];
 const ballArray = [];
 const planetArray = [];
@@ -40,14 +36,11 @@ let timeCalc = 0;
 const planetArrayImage = ['sun','mercury','venus','earth','moon','mars','jupiter','saturn','uranus','neptune','pluto'];
 const calcFunctionDataArray = [274, 3.7, 8.9, 9.8, 1.6, 3.7, 24.8, 10.4, 8.9, 11.2, 0.6];
 
-function preload() {
-}
-
 function setup (){
     createCanvas (1000, 600);
     textSize(20);
 
-    //creates ball data and planets, fills arrays
+    //creates ball and planet data, fills arrays
     for (let i = 0; i < velocity.length; i++) {
       xPos += 75;
       ballArray[i] = new Ball(xPos, velocity[i]);  
@@ -85,16 +78,17 @@ function setup (){
     stroke(100);
     line(0, 500, 850, 500);
     line(0, 100, 850, 100);
-    noStroke();
-    //text("1km Ball Drop On Solar System Bodies", 180, 25);
+    text("1 km", 900, 100);
+    text("0 km", 900, 500);
+    text("Gravity Fall Simulation", width/2 -100, 10);
     text(timeDisplay + " tDisplay", 10, 20);
-    text(timeCalc + " timecalc", 200, 20);
+    //text(timeCalc + " timecalc", 200, 20);
     fill(255, 255, 255);
 
     //draws falling balls and planets from array data
     ballArray.forEach(ballArray => {
       ballArray.move();
-      ballArray.show();
+      ballArray.display();
       
     if (ballArray.y > 490) {
       ballArray.velocity = 0;   
@@ -102,34 +96,31 @@ function setup (){
   });
 
   planetArray.forEach(planetArray => {
-    planetArray.show();
+    planetArray.display();
 });
   //calculates and displays data of falling ball graphic
   //[t] based on timer to re-calculate velocity each second of free fall 
-  const calc = (g, t, yTextPos, yTextPos2) => {
+  const calc = (g, t) => {
     //let d = 0;
-    let yPos = yTextPos;
-    let yPos2 = yTextPos2;
     let v = 0;
     v = g * t;
     //d = v * t / 3600;
     t = Math.sqrt(2 * 1000 / g);
-    //text((d).toFixed(2) + " km", 50, 75);
-    //return v = g * t;
-    textSize(15);
-    noStroke();
-    text(Math.floor(v) + " km/h", 50, 50); //50 50
-    text(t.toFixed(2) + " time", 50, 80);
-    fill(255, 255, 255);
-    //console.log("d = " + d + " v" + v + " * t" + t + " / 3600");
+    const returnArray = [v, t];
+    return returnArray;
   }
-  calc(9.8, timeCalc);
-  //calc(274, timeCalc);
-
+  
+  const calcInput = () => {
+    let xTextPos = 0;
   for (let i = 0; i < calcFunctionDataArray.length; i++) {
-    yTextPos += 75;
-    yTextPos2+= 75;
-    calc(i, timeCalc, yTextPos, yTextPos2);
-    //console.log("calcFunctionDataArray");
+    let results = calc(calcFunctionDataArray[i], timeCalc);
+    xTextPos += 75;
+
+    textSize(13);
+    noStroke();
+    text(Math.floor(results[0]) + " km/h", xTextPos, 50);
+    text(results[1].toFixed(2) + " s", xTextPos, 80);
   }
+}
+calcInput();
 }
