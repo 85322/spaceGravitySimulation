@@ -1,7 +1,7 @@
 'use strict';
 
 function setup (){
-    createCanvas (1000, 600);
+    createCanvas (1000, 700);
     textSize(20);
     let xPos = 0;
     let yPos = 505;
@@ -11,7 +11,7 @@ function setup (){
       ballArray[i] = new Ball(xPos, ballVelocity[i]);  
       planetArray[i] = new Planet(xPos, yPos, planetImageArray[i]);
     }
-    //sets timers from functions.js
+
     setInterval(() => { 
       setIntervalFunc0();
       setIntervalFunc1();
@@ -49,7 +49,9 @@ function setup (){
     line(0, 100, 850, 100);
     text("1 km", 900, 100);
     text("0 km", 900, 500);
-    text("Gravity Fall Simulation", width/2 -100, 10);
+    text("Gravity Fall Simulation", 0, 650);
+    text("objects not to scale, free fall assuming no air resistance", 0 ,670)
+    text("Joule = ", 0, 20);
     text("t = " + timeDisplay, 0, 80);
     text("velocity = " , 0, 50);
     fill(255, 255, 255);
@@ -68,15 +70,17 @@ function setup (){
     planetArray.display();
   });
 
-  //returns data of falling ball graphic
-  //[t] input parameter based on timer to re-calculate ballVelocity each millisecond of free fall 
-  const calc = (g, t) => {
-    //let d = 0;
-    let v = 0;
-    v = g * t;
-    //d = v * t / 3600;
-    t = Math.sqrt(2 * 1000 / g);
-    const returnArray = [v, t];
+  //returns data of falling ball
+  //[t] parameter based on timers to re-calculate ballVelocity each millisecond of free fall  
+  const calc = (g, t) => {    //gravity & time
+    let v = 0;                //velocity
+    let h = 1000;             //height
+    let m = 1;                //mass
+    let j = 0;                //Joule
+    v = g * t;                
+    t = Math.sqrt(2 * h / g); 
+    j = m * g * h;
+    const returnArray = [v, t, j];
     return returnArray;
   }
   
@@ -91,10 +95,12 @@ function setup (){
     textSize(13);
     noStroke();
     fill(255, 255, 255);
+    //Joule display
+    text(results[2] + " J" , xTextPos, 20);
 
     //velocity display
     text(Math.floor(results[0]) + "km/h", xTextPos, 50);
-  
+    
     //falltime display
     if(timeDisplay >= results[1]) {
 
