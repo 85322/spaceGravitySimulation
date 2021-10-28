@@ -73,24 +73,15 @@ function setup (){
 
   //returns data of falling ball
   //[t] parameter based on timers to re-calculate ballVelocity each millisecond of free fall  
-  const calc = (g, t) => {    //gravity & time
-    let v = 0;                //velocity
-    let v2 = 0;               //velocity exact final value
-    let h = 1000;             //height
-    let m = 1;                //mass
-    let j = 0;                //Joule
-    let d = 0;                //distance km rounded
-    let d2= 0;                //distance m
-    let j2 = 0;               //Joule exact final value
-    let t2 = 0;               //time exact final value
-    v = g * t * 3.6;                
-    t = Math.sqrt(2 * h / g); 
-    t2 = Math.sqrt(2 * h / g);
-    d = v * t /7000;
-    d2 = v * t /7;
-    j = m * g * d2;
-    j2 = m * g * h;
-    v2 = g * t2 * 3.6;
+  const calc = (g, t) => {    //gravity & time parameter
+    v = g * t * 3.6;          //velocity based on (t) para    
+    t = Math.sqrt(2 * h / g); //falltime based on (t) para
+    t2 = Math.sqrt(2 * h / g);//time exact final value
+    d = v * t / 7000;         //distance km rounded
+    d2 = v * t / 7;           //distance m based on (t)para
+    j = m * g * d2;           //Joule based on current (t)para
+    j2 = m * g * h;           //Joule exact final value static
+    v2 = g * t2 * 3.6;        //velocity exact final value
     const returnArray = [v, t, j, d, j2, v2];
     return returnArray;
   }
