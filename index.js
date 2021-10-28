@@ -12,35 +12,35 @@ function setup (){
       planetArray[i] = new Planet(xPos, yPos, planetImageArray[i]);
     }
 
-    setInterval(() => { 
-      setIntervalFunc0();
-      setIntervalFunc1();
-      setIntervalFunc2();
-      setIntervalFunc3();
-      setIntervalFunc4();
-      setIntervalFunc5();
-      setIntervalFunc6();
-      setIntervalFunc7();
-      setIntervalFunc8();
-      setIntervalFunc9();
-      setIntervalFunc10();
-    }, 10);  
+    const time = () => {
+      let time = millis();
+      timeDisplay = time / 1000;
+    }
 
     setInterval(() => { 
       displayTimeHolder++;
-      if (displayTimeHolder > 5350) {
+      if (displayTimeHolder > 5200) {
         return;
       } else {
         time();
       }
     }, 10);
-    
-    function time(){
-      let time = millis();
-      timeDisplay = time / 1000;
-    }
-     time();
+
+    //if ball is moving, fill timeCalc[] with separate timer values, else last value = final value to stop timer input
+     const setIntervalArray = () => {
+      for (let i = 0; i < timeCalc.length; i++) {
+        if (ballArray[i].ballVelocity !== 0) {
+          timerMillisHolderArray[i] = millis();
+          timeCalc[i] = timerMillisHolderArray[i] / 1000;
+        }else{
+        timeCalc[i] = timeCalc[i];
+      }}}
+
+      setInterval(() => { 
+        setIntervalArray();
+      }, 10);  
 }
+
 
   function draw(){ 
     background(0, 0, 0);
@@ -50,7 +50,7 @@ function setup (){
     text("1 km", 900, 100);
     text("0 km", 900, 500);
     text("Gravity Fall Simulation", 0, 650);
-    text("objects not to scale, free fall assuming no air resistance", 0 ,670)
+    text("objects not to scale, free fall assuming no air resistance, 1kg object", 0 ,670)
     text("github.com/Anon853", 0, 690);
     text("Joule = ", 0, 10);
     text("distance = ", 0, 35);
@@ -75,19 +75,23 @@ function setup (){
   //[t] parameter based on timers to re-calculate ballVelocity each millisecond of free fall  
   const calc = (g, t) => {    //gravity & time
     let v = 0;                //velocity
+    let v2 = 0;               //velocity exact final value
     let h = 1000;             //height
     let m = 1;                //mass
     let j = 0;                //Joule
     let d = 0;                //distance km rounded
     let d2= 0;                //distance m
     let j2 = 0;               //Joule exact final value
+    let t2 = 0;               //time exact final value
     v = g * t * 3.6;                
     t = Math.sqrt(2 * h / g); 
+    t2 = Math.sqrt(2 * h / g);
     d = v * t /7000;
     d2 = v * t /7;
     j = m * g * d2;
     j2 = m * g * h;
-    const returnArray = [v, t, j, d, j2];
+    v2 = g * t2 * 3.6;
+    const returnArray = [v, t, j, d, j2, v2];
     return returnArray;
   }
   
@@ -113,11 +117,14 @@ function setup (){
       text(Math.floor(results[2]) + " J" , xTextPos, 10);
   }
     //velocity display
-    text(Math.floor(results[0]) + "km/h", xTextPos, 65);
-    
+    if(timeDisplay >= results[1]) {
+      text(Math.floor(results[5]) + "km/h", xTextPos, 65);   
+      ballArray[i].ballVelocity = 0; 
+    }else{
+      text(Math.floor(results[0]) + "km/h", xTextPos, 65);
+    }
     //falltime display
     if(timeDisplay >= results[1]) {
-
         fill(0, 255, 0);
         text(results[1].toFixed(3) + " s", xTextPos, 95);   
         ballArray[i].ballVelocity = 0; 
