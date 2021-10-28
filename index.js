@@ -51,12 +51,13 @@ function setup (){
     text("0 km", 900, 500);
     text("Gravity Fall Simulation", 0, 650);
     text("objects not to scale, free fall assuming no air resistance", 0 ,670)
-    text("Joule = ", 0, 20);
-    text("t = " + timeDisplay, 0, 80);
-    text("velocity = " , 0, 50);
+    text("github.com/Anon853", 0, 690);
+    text("Joule = ", 0, 10);
+    text("distance = ", 0, 35);
+    text("t = " + timeDisplay, 0, 95);
+    text("velocity = " , 0, 65);
     fill(255, 255, 255);
 
-    //draws falling balls and planets
     ballArray.forEach(ballArray => {
       ballArray.move();
       ballArray.display();
@@ -77,14 +78,20 @@ function setup (){
     let h = 1000;             //height
     let m = 1;                //mass
     let j = 0;                //Joule
-    v = g * t;                
+    let d = 0;                //distance km rounded
+    let d2= 0;                //distance m
+    let j2 = 0;               //Joule exact final value
+    v = g * t * 3.6;                
     t = Math.sqrt(2 * h / g); 
-    j = m * g * h;
-    const returnArray = [v, t, j];
+    d = v * t /7000;
+    d2 = v * t /7;
+    j = m * g * d2;
+    j2 = m * g * h;
+    const returnArray = [v, t, j, d, j2];
     return returnArray;
   }
   
-  //calls calc(), displays return values of calc(), increments xTextPos pixel position for each planet
+  //calls calc(), displays return values of calc(), increments xTextPos pixel position for result display
   const calcInputAndDisplay = () => {
     let xTextPos = 0;
     let results = [];
@@ -95,21 +102,28 @@ function setup (){
     textSize(13);
     noStroke();
     fill(255, 255, 255);
-    //Joule display
-    text(results[2] + " J" , xTextPos, 20);
+    
+    //distance display 
+    text((results[3].toFixed(1)) + " km" , xTextPos, 35);
 
+    //Joule display
+    if (ballArray[i].ballVelocity == 0){
+      text(Math.floor(results[4]) + " J" , xTextPos, 10);
+    }else{
+      text(Math.floor(results[2]) + " J" , xTextPos, 10);
+  }
     //velocity display
-    text(Math.floor(results[0]) + "km/h", xTextPos, 50);
+    text(Math.floor(results[0]) + "km/h", xTextPos, 65);
     
     //falltime display
     if(timeDisplay >= results[1]) {
 
         fill(0, 255, 0);
-        text(results[1].toFixed(3) + " s", xTextPos, 80);   
+        text(results[1].toFixed(3) + " s", xTextPos, 95);   
         ballArray[i].ballVelocity = 0; 
       }else{
         fill(255, 0, 0);
-        text(timeDisplay + " s", xTextPos, 80);
+        text(timeDisplay + " s", xTextPos, 95);
       }
     fill(255, 255, 255);
     text("Gravity \n" + calcGravityDataArray[i] + " m/s²", xTextPos -22, 580);
@@ -117,4 +131,14 @@ function setup (){
 }
 calcInputAndDisplay();
 }
-
+//        _ _   _           _          __
+//   __ _(_) |_| |__  _   _| |__      / /
+//  / _` | | __| '_ \| | | | '_ \    / / 
+// | (_| | | |_| | | | |_| | |_) |  / /  
+//  \__, |_|\__|_| |_|\__,_|_.__/  /_/   
+//  |___/
+//     _                       ___ ____ _____ 
+//    / \   _ __   ___  _ __  ( _ ) ___|___ / 
+//   / _ \ | '_ \ / _ \| '_ \ / _ \___ \ |_ \ 
+//  / ___ \| | | | (_) | | | | (_) |__) |__) |
+// /_/   \_\_| |_|\___/|_| |_|\___/____/____/
