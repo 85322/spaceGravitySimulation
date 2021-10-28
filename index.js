@@ -72,8 +72,17 @@ function setup (){
   });
 
   //returns data of falling ball
-  //[t] parameter based on timers to re-calculate ballVelocity each millisecond of free fall  
-  const calc = (g, t) => {    //gravity & time parameter
+  //(t) parameter based on timers to re-calculate ballVelocity each millisecond of free fall  
+    const calc = (g, t) => { //gravity & time parameter
+    let v = 0;                
+    let v2 = 0;               
+    let h = 1000;             
+    let m = 1;                
+    let j = 0;                
+    let d = 0;                
+    let d2= 0;                
+    let j2 = 0;               
+    let t2 = 0;  
     v = g * t * 3.6;          //velocity based on (t) para    
     t = Math.sqrt(2 * h / g); //falltime based on (t) para
     t2 = Math.sqrt(2 * h / g);//time exact final value

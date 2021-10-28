@@ -31,14 +31,4 @@ let timerMillisHolderArray10 = 0;
 let timerMillisHolderArray = [timerMillisHolderArray0,timerMillisHolderArray1,timerMillisHolderArray2, timerMillisHolderArray3, timerMillisHolderArray4, timerMillisHolderArray5, timerMillisHolderArray6, timerMillisHolderArray7, timerMillisHolderArray8, timerMillisHolderArray9, timerMillisHolderArray10];
 let timeCalc = [timer0, timer1, timer2, timer3, timer4, timer5, timer6, timer7, timer8, timer9, timer10];
 const planetImageArray = ['sun','mercury','venus','earth','moon','mars','jupiter','saturn','uranus','neptune','pluto'];
-const calcGravityDataArray = [274, 3.7, 8.9, 9.8, 1.6, 3.7, 24.8, 10.4, 8.9, 11.2, 0.6];
-
-let v = 0;                
-let v2 = 0;               
-let h = 1000;             
-let m = 1;                
-let j = 0;                
-let d = 0;                
-let d2= 0;                
-let j2 = 0;               
-let t2 = 0;               
+const calcGravityDataArray = [274, 3.7, 8.9, 9.8, 1.6, 3.7, 24.8, 10.4, 8.9, 11.2, 0.6];             
