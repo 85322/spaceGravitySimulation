@@ -1,7 +1,13 @@
-class Ball {
+class Sphere {
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
+  }
+}
+
+class Ball extends Sphere {
     constructor(x, v){
-      this.x = x;
-      this.y = 100;
+      super(x, 100);
       this.ballVelocity = v;
   }
     move(){
@@ -13,10 +19,9 @@ class Ball {
     }
   }
   
-  class Planet {
+  class Planet extends Sphere {
     constructor(x, y, img){
-      this.x = x;
-      this.y = y;
+      super(x, y);
       this.img = loadImage('assets/' + img + ".png");
     }
       display(){
