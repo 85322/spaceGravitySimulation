@@ -18,7 +18,7 @@ Free fall / falling speed equations
 ---------
 
 
-The simulation uses the standard formula from Newtonian physics to figure out how long before the falling object:
+The simulation uses the standard formula from Newtonian physics to figure out how long the falling object takes:
 
 * The force of earth's gravity, g = 9.8 m/s2 
 * Gravity accelerates you at 9.8 meters per second per second. After one second, you're falling 9.8 m/s. After two seconds, you're falling 19.6 m/s, and so on.
