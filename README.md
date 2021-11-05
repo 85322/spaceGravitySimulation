@@ -25,7 +25,8 @@ The simulation uses the standard formula from Newtonian physics to figure out ho
 * Time to hit ground: sqrt ( 2 * height / 9.8 )
 * It's the square root because you fall faster the longer you fall.
 * Velocity at impact: sqrt( 2 * g * height )
-* Energy at impact time: 1/2 * mass * velocity2 = mass * g * height
+* Energy at impact time: 1/2 * mass * velocity² = mass * g * height
+* Distance: velocity * time
 
 ![image](https://www.angio.net/personal/climb/speedplot.png) 
 
