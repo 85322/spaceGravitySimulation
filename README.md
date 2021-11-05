@@ -11,7 +11,7 @@ Made in Javascript and p5.js.
 Features
 ---------
 
-Calculates time of impact, current velocity, traveled distance and energy of each celestial body in real time.
+Calculates time of impact, current velocity, traveled distance and energy on each celestial body in real time.
 
 
 Free fall / falling speed equations
