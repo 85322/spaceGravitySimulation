@@ -1,6 +1,6 @@
 # Gravity Fall Simulation
 
-Simulating a free fall ball drop of 1 km in height on different celestial bodies of the solar system.
+Simulating a free falling ball drop of 1 km height on different celestial bodies of the solar system.
 Made in Javascript and p5.js.
 
 
@@ -32,7 +32,7 @@ The simulation uses the standard formula from Newtonian physics to figure out ho
 Notes
 --------
 
-It's a good visualisation showing why Pluto is now considered a dwarf planet. To be labeled a planet the requirements are:
+It's a good visualisation of showing why Pluto is now considered a dwarf planet. To be labeled as planet the requirements are:
 
     1. It is in orbit around the Sun.
     2. It has sufficient mass to assume hydrostatic equilibrium (a nearly round shape).
@@ -48,6 +48,6 @@ Resources
 ---------
 
 * Planet data: https://nssdc.gsfc.nasa.gov/planetary/factsheet/
-* Calculation formulas: https://www.angio.net/personal/climb/speed.html
-* Calculation formulas: https://www.gigacalculator.com/calculators/speed-calculator.php
+* Equation formulas: https://www.angio.net/personal/climb/speed.html
+* Equation formulas: https://www.gigacalculator.com/calculators/speed-calculator.php
 * Pluto not a planet: https://www.loc.gov/everyday-mysteries/item/why-is-pluto-no-longer-a-planet/
