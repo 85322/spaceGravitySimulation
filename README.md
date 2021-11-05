@@ -44,6 +44,7 @@ Pluto does not fulfill the third requirement, which means having gravitational i
 
 ![image](https://i.postimg.cc/nVDgHbxB/pluto-charon-usa-sizes-en.png) 
 
+If the animation gets stuck, reload page.
 
 Resources
 ---------
