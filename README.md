@@ -4,7 +4,7 @@ Simulating a free falling ball drop of 1 km height on different celestial bodies
 Made in Javascript and p5.js.
 
 
-* Watch here: https://anon853.github.io/spaceGravitySimulation/ 
+* Watch here: https://85322.github.io/spaceGravitySimulation/ 
 
 [![image](https://i.postimg.cc/Z5y4FhcY/Untitled.png)](https://85322.github.io/spaceGravitySimulation/)  
 
