@@ -51,7 +51,7 @@ function setup (){
     text("0 km", 900, 500);
     text("Gravity Fall Simulation", 0, 650);
     text("objects not to scale, free fall assuming no air resistance, 1kg object", 0 ,670)
-    text("github.com/Anon853", 0, 690);
+    text("github.com/85322", 0, 690);
     text("Joule = ", 0, 10);
     text("distance = ", 0, 35);
     text("t = " + timeDisplay, 0, 95);
